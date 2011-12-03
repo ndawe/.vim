@@ -154,4 +154,11 @@ func! WordProcessorMode()
   setlocal linebreak 
   setlocal syntax=none 
 endfu 
-com! WP call WordProcessorMode() 
+com! WP call WordProcessorMode()
+
+if (v:version >= 700)
+    highlight SpellBad      ctermfg=Red         term=Reverse        guisp=Red       gui=undercurl   ctermbg=White
+    highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=White
+    highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White
+    highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White
+endif " version 7+ 
