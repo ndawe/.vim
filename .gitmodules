@@ -100,9 +100,6 @@
 [submodule "bundle/argtexobj"]
 	path = bundle/argtexobj
 	url = git://github.com/vim-scripts/argtextobj.vim.git
-[submodule "bundle/zoomwin"]
-	path = bundle/zoomwin
-	url = git://github.com/vim-scripts/ZoomWin.git
 [submodule "bundle/pyte"]
 	path = bundle/pyte
 	url = git://github.com/vim-scripts/pyte.git
