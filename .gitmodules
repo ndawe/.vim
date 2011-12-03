@@ -130,3 +130,6 @@
 [submodule "bundle/vimroom"]
 	path = bundle/vimroom
 	url = https://github.com/mikewest/vimroom.git
+[submodule "bundle/vim-hicolors"]
+	path = bundle/vim-hicolors
+	url = git://github.com/vim-scripts/HiColors.git
