@@ -112,7 +112,7 @@ function! MyStatusLine(mode)
     elseif a:mode == 'Enter'
         let statusline.="%r%*"
     endif
-    let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %y\ [%{&encoding}:%{&fileformat}]\ \ "
+    let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %{fugitive#statusline()} %y\ [%{&encoding}:%{&fileformat}]\ \ "
     return statusline
 endfunction
 
