@@ -9,3 +9,5 @@ Install ctags::
 and::
 
    mkdir ~/.vim_crud
+   ln -s ~/.vim/vimrc ~/.vimrc
+   ln -s ~/.vim/gvimrc ~/.gvimrc
