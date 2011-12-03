@@ -4,10 +4,14 @@ See http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-p
 
 Install ctags::
 
-   sudo apt-get install exuberant-ctags
+    sudo apt-get install exuberant-ctags
 
 and::
 
-   mkdir ~/.vim_crud
-   ln -s ~/.vim/vimrc ~/.vimrc
-   ln -s ~/.vim/gvimrc ~/.gvimrc
+    mkdir ~/.vim_crud
+    ln -s ~/.vim/vimrc ~/.vimrc
+    ln -s ~/.vim/gvimrc ~/.gvimrc
+
+To update to the latest version of each plugin bundle, run the following::
+
+    git submodule foreach git pull origin master
