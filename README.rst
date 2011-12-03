@@ -6,4 +6,6 @@ Install ctags::
 
    sudo apt-get install ctags
 
-and ``mkdir ~/.vim_crud``
+and::
+
+   mkdir ~/.vim_crud
