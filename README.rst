@@ -4,7 +4,7 @@ See http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-p
 
 Install ctags::
 
-   sudo apt-get install ctags
+   sudo apt-get install exuberant-ctags
 
 and::
 
