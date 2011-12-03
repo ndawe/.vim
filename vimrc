@@ -44,13 +44,26 @@ set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set autoindent		" always set autoindenting on
 
-set shiftwidth=2
+set smartindent
+set tabstop=4
+set shiftwidth=4
+
+" Makefile sanity
+autocmd BufEnter ?akefile* set noet ts=8 sw=8
+
+" Majority vote on tabs vs spaces
+function Kees_settabs()
+    if len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^\\t"')) > len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^ "'))
+        set noet ts=8 sw=8
+    endif
+endfunction
+autocmd BufReadPost * call Kees_settabs()
 
 " For all text files set 'textwidth' to 78 characters.
 autocmd FileType text setlocal textwidth=78
 
 " Delete trailing whitespace before saving in cpp and python
-autocmd BufWritePre *.cc,*.h,*py :%s/\s\+$//e
+autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
