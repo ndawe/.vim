@@ -88,7 +88,7 @@ set statusline+=%*
 set laststatus=2
 set noerrorbells
 set vb t_vb=
-set spell
+set nospell
 set tw=80
 
 " Don't use plaintex, but tex
@@ -116,8 +116,8 @@ function! MyStatusLine(mode)
     return statusline
 endfunction
 
-au WinEnter * setlocal statusline=%!MyStatusLine('Enter')
-au WinLeave * setlocal statusline=%!MyStatusLine('Leave')
+"au WinEnter * setlocal statusline=%!MyStatusLine('Enter')
+"au WinLeave * setlocal statusline=%!MyStatusLine('Leave')
 set statusline=%!MyStatusLine('Enter')
 
 function! InsertStatuslineColor(mode)
