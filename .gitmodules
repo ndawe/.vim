@@ -130,3 +130,6 @@
 [submodule "bundle/vim-hicolors"]
 	path = bundle/vim-hicolors
 	url = git://github.com/vim-scripts/HiColors.git
+[submodule "bundle/vim-latex"]
+	path = bundle/vim-latex
+	url = git://github.com/jcf/vim-latex.git
