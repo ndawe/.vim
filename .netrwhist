@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='scp://t3/home/ekfriis/'
-let g:netrw_dirhist_2='scp://t3/Code/cmssw/'
-let g:netrw_dirhist_3='scp://t3/Code/cmssw/TauAnalysis413/'
-let g:netrw_dirhist_4='scp://t3/Code/cmssw/TauAnalysis413/src/'
-let g:netrw_dirhist_5='/Users/friis/.oh-my-zsh/plugins'
-let g:netrw_dirhist_6='/Users/friis/.oh-my-zsh/plugins/pip'
-let g:netrw_dirhist_7='/Users/friis/.oh-my-zsh/plugins'
-let g:netrw_dirhist_8='/Users/friis/.oh-my-zsh/plugins/history-substring-search'
-let g:netrw_dirhist_9='/Users/friis/.oh-my-zsh/plugins'
+let g:netrw_dirhist_cnt =0
