@@ -51,6 +51,9 @@ set shiftwidth=4
 " Makefile sanity
 autocmd BufEnter ?akefile* set noet ts=8 sw=8
 
+" reStructuredText
+autocmd BufEnter *.rst set noet ts=3 sw=3
+
 " Majority vote on tabs vs spaces
 function Kees_settabs()
     if len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^\\t"')) > len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^ "'))
