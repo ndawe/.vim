@@ -29,7 +29,7 @@ set visualbell
 set noerrorbells
 set wildmenu
 set wildmode=list:longest
-set wildignore=*.o,*.root,*.pyc,*.png,*.pdf,*.ps,*CVS/*,*/lxbatch/*,*/crab/*,*/lxbatch_log/*
+set wildignore=*.o,*.root,*.pyc,*.png,*.pdf,*.ps
 set ignorecase
 set smartcase
 set scrolloff=3
@@ -165,5 +165,3 @@ if (v:version >= 700)
     highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White
     highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White
 endif " version 7+ 
-
-let g:pyflakes_use_quickfix = 0
