@@ -165,3 +165,5 @@ if (v:version >= 700)
     highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White
     highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White
 endif " version 7+ 
+
+let g:pyflakes_use_quickfix = 0
