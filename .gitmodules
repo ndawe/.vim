@@ -64,9 +64,6 @@
 [submodule "bundle/Pydiction"]
 	path = bundle/Pydiction
 	url = git://github.com/vim-scripts/Pydiction.git
-[submodule "bundle/pyflakes.vim"]
-	path = bundle/pyflakes.vim
-	url = git://github.com/vim-scripts/pyflakes.vim.git
 [submodule "bundle/python.vim--Vasiliev"]
 	path = bundle/python.vim--Vasiliev
 	url = git://github.com/vim-scripts/python.vim--Vasiliev.git
