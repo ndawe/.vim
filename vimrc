@@ -165,3 +165,7 @@ if (v:version >= 700)
     highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White
     highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White
 endif " version 7+ 
+
+" http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
+highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+match OverLength /\%81v.\+/
