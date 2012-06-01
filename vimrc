@@ -52,7 +52,7 @@ set shiftwidth=4
 autocmd BufEnter ?akefile* set noet ts=8 sw=8
 
 " reStructuredText
-autocmd BufEnter *.rst set noet ts=3 sw=3
+autocmd BufEnter *.rst set et ts=3 sw=3
 
 " Majority vote on tabs vs spaces
 function Kees_settabs()
