@@ -181,3 +181,6 @@ function! s:Underline(chars)
   put =strpart(uline, 0, nr_columns)
 endfunction
 command! -nargs=? Underline call s:Underline(<q-args>)
+
+" http://stackoverflow.com/questions/2360249/vim-automatically-removes-indentation-on-python-comments
+inoremap # X<BS>#
