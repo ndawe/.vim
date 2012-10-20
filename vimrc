@@ -168,10 +168,10 @@ endif " version 7+
 
 " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
-match OverLength /\%81v.\+/
+match OverLength /\%80v.\+/
 
 if exists("&colorcolumn")
-    set colorcolumn=81
+    set colorcolumn=80
 endif
 
 function! s:Underline(chars)
