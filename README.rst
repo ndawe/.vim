@@ -6,6 +6,11 @@ Install ctags::
 
     sudo apt-get install exuberant-ctags
 
+Initialize the plugin submodules::
+
+    git submodule init
+    git submodule update
+
 and::
 
     mkdir ~/.vimcrud
