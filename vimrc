@@ -65,8 +65,8 @@ autocmd BufReadPost * call Kees_settabs()
 " For all text files set 'textwidth' to 78 characters.
 autocmd FileType text setlocal textwidth=78
 
-" Delete trailing whitespace before saving in cpp and python
-autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py :%s/\s\+$//e
+" Delete trailing whitespace before saving in tex, cpp and python
+autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
