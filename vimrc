@@ -168,7 +168,7 @@ endif " version 7+
 
 " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
-match OverLength /\%80v.\+/
+autocmd BufEnter *.py,*.cpp,*.cxx,*.rst match OverLength /\%80v.\+/
 
 if exists("&colorcolumn")
     set colorcolumn=80
