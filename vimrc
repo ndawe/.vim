@@ -167,12 +167,14 @@ if (v:version >= 700)
 endif " version 7+ 
 
 " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
-highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+autocmd BufEnter *.py,*.cpp,*.cxx,*.rst highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
 autocmd BufEnter *.py,*.cpp,*.cxx,*.rst match OverLength /\%80v.\+/
 
-if exists("&colorcolumn")
-    set colorcolumn=80
-endif
+autocmd BufEnter *.py,*.cpp,*.cxx,*.rst
+            \ if exists("&colorcolumn") |
+                \ set colorcolumn=80 |
+            \ endif
+augroup END
 
 function! s:Underline(chars)
   let chars = empty(a:chars) ? '-' : a:chars
