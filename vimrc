@@ -16,15 +16,10 @@ set complete=.,w,b
 " Enable syntax highlighting
 syntax on
 
-" Highlight last searched term
 "set cursorline
-"set cursorcolumn
-set hlsearch
+"set cursorcolum
 set hidden
 set autowrite
-set expandtab
-set nowrap
-set number
 set visualbell
 set noerrorbells
 set wildmenu
@@ -38,15 +33,21 @@ set novisualbell
 " Enable filetype detection
 filetype plugin indent on
 
-set history=50		" keep 50 lines of command line history
+set history=700
+set undolevels=700
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set autoindent		" always set autoindenting on
 
 set smartindent
+
+" Real programmers don't use TABs but spaces
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
+set shiftround
+set expandtab
 
 " Makefile sanity
 autocmd BufEnter ?akefile* set noet ts=8 sw=8
@@ -54,8 +55,9 @@ autocmd BufEnter ?akefile* set noet ts=8 sw=8
 " reStructuredText
 autocmd BufEnter *.rst set et ts=3 sw=3
 
+
 " Majority vote on tabs vs spaces
-function Kees_settabs()
+function! Kees_settabs()
     if len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^\\t"')) > len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^ "'))
         set noet ts=8 sw=8
     endif
@@ -186,3 +188,74 @@ command! -nargs=? Underline call s:Underline(<q-args>)
 
 " http://stackoverflow.com/questions/2360249/vim-automatically-removes-indentation-on-python-comments
 inoremap # X<BS>#
+
+" https://github.com/mbrochh/vim-as-a-python-ide/blob/master/.vimrc
+" http://www.youtube.com/watch?feature=endscreen&NR=1&v=YhqsjUUHj6g
+set mouse=a
+set bs=2
+" Autromatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost vimrc source %
+
+" better copy & paste
+set pastetoggle=<F2>
+set clipboard=unnamed
+
+" remove highlight of your last search
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+" quicksave
+noremap <C-Z> :update<CR>
+inoremap <C-Z> <C-C>:update<CR>
+vnoremap <C-Z> <C-O>:update<CR>
+
+" rebind <Leader> key
+let mapleader = ","
+
+" quickexit
+noremap <Leader>e :quit<CR>  " quit current window
+noremap <Leader>E :qa!<CR>   " quit all windows
+
+" bind keys to move around windows
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" easier moving between tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+map <Leader>b <esc>:tabnew<CR>
+
+" map sort function to a key
+vnoremap <Leader>s :sort<CR>
+
+" easier moving of code blocks
+vnoremap < <gv
+vnoremap > >gv
+
+" easier formatting of paragraphs
+vmap Q gq
+nmap Q gqap
+
+" Make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Showing line numbers and length
+set number  " show line numbers
+set tw=79   " width of document (used by gd)
+set nowrap  " don't automatically wrap on load
+set fo-=t   " don't automatically wrap text when typing
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
