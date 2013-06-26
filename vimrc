@@ -191,7 +191,7 @@ inoremap # X<BS>#
 
 " https://github.com/mbrochh/vim-as-a-python-ide/blob/master/.vimrc
 " http://www.youtube.com/watch?feature=endscreen&NR=1&v=YhqsjUUHj6g
-set mouse=a
+"set mouse=a
 set bs=2
 " Autromatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
