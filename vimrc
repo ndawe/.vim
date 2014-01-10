@@ -68,7 +68,7 @@ autocmd BufReadPost * call Kees_settabs()
 autocmd FileType text setlocal textwidth=78
 
 " Delete trailing whitespace before saving in tex, cpp and python
-autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.rst :%s/\s\+$//e
+autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.bib,*.rst :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
@@ -262,3 +262,6 @@ if version >= 703
     set colorcolumn=80
     highlight ColorColumn ctermbg=233
 endif
+
+" auto linebreak in text
+"au BufEnter *.txt *.tex setl tx ts=4 sw=4 fo+=n2a
