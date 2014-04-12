@@ -71,11 +71,7 @@ autocmd FileType text setlocal textwidth=78
 autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.bib,*.rst :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\   exe "normal g`\"" |
-\ endif
-augroup END
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " NERD Tree settings
 map <silent> <C-P> <ESC>:NERDTreeToggle<CR>
