@@ -68,7 +68,7 @@ autocmd BufReadPost * call Kees_settabs()
 autocmd FileType text setlocal textwidth=78
 
 " Delete trailing whitespace before saving in tex, cpp and python
-autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.bib,*.rst :%s/\s\+$//e
+autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.rst,*.md,*.bib :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
