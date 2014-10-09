@@ -261,3 +261,7 @@ endif
 
 " auto linebreak in text
 "au BufEnter *.txt *.tex setl tx ts=4 sw=4 fo+=n2a
+
+set nofoldenable    " disable folding
+
+au BufRead,BufNewFile *.tex set fileformat=unix
