@@ -1,4 +1,4 @@
-Noel's vim configuration and plugins forked from Evan.
+Noel's vim configuration and plugins.
 
 See http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
 
