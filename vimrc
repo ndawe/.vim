@@ -264,4 +264,4 @@ endif
 
 set nofoldenable    " disable folding
 
-au BufRead,BufNewFile *.tex set fileformat=unix
+au BufRead,BufNewFile *.tex,*.sty set fileformat=unix
