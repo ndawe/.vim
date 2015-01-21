@@ -29,6 +29,7 @@ set ignorecase
 set smartcase
 set scrolloff=3
 set novisualbell
+set nojoinspaces
 
 " Enable filetype detection
 filetype plugin indent on
