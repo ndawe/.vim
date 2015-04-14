@@ -18,6 +18,7 @@ and::
     ln -s ~/.vim/gvimrc ~/.gvimrc
 
 To update to the latest version of each plugin bundle, run the following::
-
+    
+    git submodule foreach git clean -fdx
     git submodule foreach git fetch origin master
     git submodule foreach git reset --hard origin/master
