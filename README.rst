@@ -19,4 +19,5 @@ and::
 
 To update to the latest version of each plugin bundle, run the following::
 
-    git submodule foreach git pull origin master
+    git submodule foreach git fetch origin master
+    git submodule foreach git reset --hard origin/master
