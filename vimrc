@@ -1,5 +1,11 @@
 set nocompatible
 filetype off 
+
+" File is large from 10mb
+let g:LARGEFILESIZE = 1024 * 1024 * 10
+let g:FILESIZE=getfsize(expand('%:p'))
+
+" Pathogen setup
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
@@ -7,10 +13,10 @@ call pathogen#runtime_append_all_bundles()
 set dir=~/.vimcrud
 set backupdir=~/.vimcrud
 
-" allow backspacing over everything in insert mode
+" Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-"" Reduce autocomplete
+" Reduce autocomplete
 set complete=.,w,b
 
 " Enable syntax highlighting
@@ -36,39 +42,50 @@ filetype plugin indent on
 
 set history=700
 set undolevels=700
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-set autoindent		" always set autoindenting on
+set ruler		" Show the cursor position all the time
+set showcmd		" Display incomplete commands
+set incsearch	" Do incremental searching
+set autoindent	" Always set autoindentation on
 
 set smartindent
 
-" Real programmers don't use TABs but spaces
+" Real programmers don't use tabs
 set tabstop=4
-set softtabstop=4
 set shiftwidth=4
+set softtabstop=4
 set shiftround
 set expandtab
 
-" Makefile sanity
+" except in Makefiles...
 autocmd BufEnter ?akefile* set noet ts=8 sw=8
 
-" reStructuredText
+" Special case for reStructuredText indentation
 autocmd BufEnter *.rst set et ts=3 sw=3
 
-
-" Majority vote on tabs vs spaces
-function! Kees_settabs()
-    if len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^\\t"')) > len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^ "'))
-        set noet ts=8 sw=8
+" Majority vote on indentation (tabs vs spaces, 4 spaces vs 2 spaces)
+" for those times when you need to edit someone else's code
+function! Determine_Indentation()
+    if g:FILESIZE > g:LARGEFILESIZE
+        return
+    endif
+    let n_tabs = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^\\t"'))
+    let n_spaces = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^ "'))
+    if n_tabs > n_spaces
+        set tabstop=8 shiftwidth=8 noexpandtab
+    else
+        let n_2_spaces = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^  \\S"'))
+        let n_4_spaces = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^    \\S"'))
+        if n_2_spaces > n_4_spaces
+            set tabstop=2 shiftwidth=2 softtabstop=2
+        endif
     endif
 endfunction
-autocmd BufReadPost * call Kees_settabs()
+autocmd BufReadPost * call Determine_Indentation()
 
 " For all text files set 'textwidth' to 78 characters.
 autocmd FileType text setlocal textwidth=78
 
-" Delete trailing whitespace before saving in tex, cpp and python
+" Delete trailing whitespace
 autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.rst,*.md,*.bib :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
@@ -79,7 +96,7 @@ map <silent> <C-P> <ESC>:NERDTreeToggle<CR>
 let NERDTreeIgnore=['CVS', 'pyc$', '\.root$', 'pdf$', 'png$', '@Batch', 'xml.bak$', 'xml.fragment$']
 let NERDTreeWinSize=61
 let NERDTreeWinPos=0
-let NERDTreeChDirMode=2 "always set root as cwd
+let NERDTreeChDirMode=2 " Always set root as cwd
 let NERDTreeChristmasTree = 1
 
 let g:syntastic_auto_loc_list=1
@@ -114,7 +131,12 @@ function! MyStatusLine(mode)
     elseif a:mode == 'Enter'
         let statusline.="%r%*"
     endif
-    let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %{fugitive#statusline()} %y\ [%{&encoding}:%{&fileformat}]\ \ "
+    if &expandtab == "0"
+        let indentation = "tabs"
+    else
+        let indentation = "%{&tabstop}-space"
+    endif
+    let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %{fugitive#statusline()} %y\ [".indentation.":%{&encoding}:%{&fileformat}]\ \ "
     return statusline
 endfunction
 
@@ -123,15 +145,15 @@ endfunction
 set statusline=%!MyStatusLine('Enter')
 
 function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi StatColor guibg=orange ctermbg=lightred
-  elseif a:mode == 'r'
-    hi StatColor guibg=#e454ba ctermbg=magenta
-  elseif a:mode == 'v'
-    hi StatColor guibg=#e454ba ctermbg=magenta
-  else
-    hi StatColor guibg=red ctermbg=red
-  endif
+    if a:mode == 'i'
+        hi StatColor guibg=orange ctermbg=lightred
+    elseif a:mode == 'r'
+        hi StatColor guibg=#e454ba ctermbg=magenta
+    elseif a:mode == 'v'
+        hi StatColor guibg=#e454ba ctermbg=magenta
+    else
+        hi StatColor guibg=red ctermbg=red
+    endif
 endfunction 
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
@@ -145,17 +167,17 @@ map \cw "+yiw
 command! CondenseBlanks :%s/\n\{3,}/\r\r/e
 let $uw='/afs/hep.wisc.edu/home/efriis'
 
-func! WordProcessorMode() 
-  setlocal formatoptions=1 
-  setlocal noexpandtab 
-  map j gj 
-  map k gk 
-  setlocal smartindent 
-  setlocal spell spelllang=en_us 
-  setlocal wrap 
-  setlocal linebreak 
-  setlocal syntax=none 
-endfu 
+function! WordProcessorMode() 
+    setlocal formatoptions=1 
+    setlocal noexpandtab 
+    map j gj 
+    map k gk 
+    setlocal smartindent 
+    setlocal spell spelllang=en_us 
+    setlocal wrap 
+    setlocal linebreak 
+    setlocal syntax=none 
+endfunction
 com! WP call WordProcessorMode()
 
 if (v:version >= 700)
@@ -168,7 +190,6 @@ endif " version 7+
 " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
 autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
 autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex match OverLength /\%80v.\+/
-
 autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex
             \ if exists("&colorcolumn") |
                 \ set colorcolumn=80 |
@@ -176,10 +197,10 @@ autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex
 augroup END
 
 function! s:Underline(chars)
-  let chars = empty(a:chars) ? '-' : a:chars
-  let nr_columns = virtcol('$') - 1
-  let uline = repeat(chars, (nr_columns / len(chars)) + 1)
-  put =strpart(uline, 0, nr_columns)
+    let chars = empty(a:chars) ? '-' : a:chars
+    let nr_columns = virtcol('$') - 1
+    let uline = repeat(chars, (nr_columns / len(chars)) + 1)
+    put =strpart(uline, 0, nr_columns)
 endfunction
 command! -nargs=? Underline call s:Underline(<q-args>)
 
@@ -194,46 +215,46 @@ set bs=2
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost vimrc source %
 
-" better copy & paste
+" Better copy & paste
 set pastetoggle=<F2>
 set clipboard=unnamed
 
-" remove highlight of your last search
+" Remove highlight of your last search
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 inoremap <C-n> :nohl<CR>
 
-" quicksave
+" Quicksave
 noremap <C-Z> :update<CR>
 inoremap <C-Z> <C-C>:update<CR>
 vnoremap <C-Z> <C-O>:update<CR>
 
-" rebind <Leader> key
+" Rebind <Leader> key
 let mapleader = ","
 
-" quickexit
+" Quickexit
 noremap <Leader>e :quit<CR>  " quit current window
 noremap <Leader>E :qa!<CR>   " quit all windows
 
-" bind keys to move around windows
+" Bind keys to move around windows
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-" easier moving between tabs
+" Easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 map <Leader>b <esc>:tabnew<CR>
 
-" map sort function to a key
+" Map sort function to a key
 vnoremap <Leader>s :sort<CR>
 
-" easier moving of code blocks
+" Easier moving of code blocks
 vnoremap < <gv
 vnoremap > >gv
 
-" easier formatting of paragraphs
+" Easier formatting of paragraphs
 vmap Q gq
 nmap Q gqap
 
@@ -260,9 +281,27 @@ if version >= 703
     highlight ColorColumn ctermbg=233
 endif
 
-" auto linebreak in text
+" Auto linebreak in text
 "au BufEnter *.txt *.tex setl tx ts=4 sw=4 fo+=n2a
 
-set nofoldenable    " disable folding
+" Disable folding
+set nofoldenable
 
 au BufRead,BufNewFile *.tex,*.sty set fileformat=unix
+
+function! LargeFileOptions()
+    " no syntax highlighting etc
+    set eventignore+=FileType
+    " save memory when other file is viewed
+    setlocal bufhidden=unload
+    " is read-only (write with :w new_filename)
+    setlocal buftype=nowrite
+    " no undo possible
+    setlocal undolevels=-1
+    " display message
+    autocmd VimEnter *  echo "The file is larger than " . (g:LARGEFILESIZE / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
+endfunction
+
+augroup LargeFileTest 
+    autocmd BufReadPre * if g:FILESIZE > g:LARGEFILESIZE || g:FILESIZE == -2 | call LargeFileOptions() | endif
+augroup END

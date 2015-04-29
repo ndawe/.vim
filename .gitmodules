@@ -173,6 +173,8 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
+	ignore = dirty
 [submodule "bundle/Align"]
 	path = bundle/Align
 	url = git://github.com/vim-scripts/Align.git
+	ignore = dirty
