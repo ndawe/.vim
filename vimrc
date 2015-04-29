@@ -86,7 +86,7 @@ autocmd BufReadPost * call Determine_Indentation()
 autocmd FileType text setlocal textwidth=78
 
 " Delete trailing whitespace
-autocmd BufWritePre *.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.rst,*.md,*.bib :%s/\s\+$//e
+autocmd BufWritePre *.sh,*.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.tex,*.rst,*.md,*.bib :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
