@@ -198,13 +198,18 @@ if (v:version >= 700)
 endif " version 7+ 
 
 " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
-autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex highlight OverLength ctermbg=lightred ctermfg=white guibg=#FFD9D9
 autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex match OverLength /\%80v.\+/
 autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex
             \ if exists("&colorcolumn") |
                 \ set colorcolumn=80 |
             \ endif
 augroup END
+
+if version >= 703
+    "set colorcolumn=80
+    "highlight ColorColumn ctermbg=233
+endif
 
 function! s:Underline(chars)
     let chars = empty(a:chars) ? '-' : a:chars
@@ -285,11 +290,6 @@ set number  " show line numbers
 set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
-
-if version >= 703
-    set colorcolumn=80
-    highlight ColorColumn ctermbg=233
-endif
 
 " Auto linebreak in text
 "au BufEnter *.txt *.tex setl tx ts=4 sw=4 fo+=n2a
