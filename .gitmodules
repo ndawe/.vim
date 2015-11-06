@@ -166,10 +166,6 @@
 	path = bundle/vim-latex
 	url = git://github.com/jcf/vim-latex.git
 	ignore = dirty
-[submodule "bundle/cute-python"]
-	path = bundle/cute-python
-	url = git://github.com/ehamberg/vim-cute-python.git
-	ignore = dirty
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
