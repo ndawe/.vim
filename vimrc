@@ -183,10 +183,10 @@ function! WordProcessorMode()
     map j gj 
     map k gk 
     setlocal smartindent 
-    setlocal spell spelllang=en_us 
+    setlocal spell spelllang=en_au 
     setlocal wrap 
     setlocal linebreak 
-    setlocal syntax=none 
+    "setlocal syntax=none 
 endfunction
 com! WP call WordProcessorMode()
 
