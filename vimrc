@@ -55,9 +55,6 @@ set undolevels=700
 set ruler		" Show the cursor position all the time
 set showcmd		" Display incomplete commands
 set incsearch	" Do incremental searching
-set autoindent	" Always set autoindentation on
-
-set smartindent
 
 " Real programmers don't use tabs
 set tabstop=4
@@ -65,9 +62,12 @@ set shiftwidth=4
 set softtabstop=4
 set shiftround
 set expandtab
+set smarttab
+set autoindent	" Always set autoindentation on
+set smartindent
 
 " except in Makefiles...
-autocmd BufEnter ?akefile* set noet ts=8 sw=8
+"autocmd BufEnter ?akefile* set noet ts=8 sw=8
 
 " Special case for reStructuredText indentation
 autocmd BufEnter *.rst set et ts=3 sw=3
@@ -144,7 +144,7 @@ function! MyStatusLine(mode)
     if &expandtab == "0"
         let indentation = "tabs"
     else
-        let indentation = "%{&tabstop}-space"
+        let indentation = "%{&shiftwidth}-space"
     endif
     let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %{fugitive#statusline()} %y\ [".indentation.":%{&encoding}:%{&fileformat}]\ \ "
     return statusline
@@ -204,12 +204,12 @@ autocmd BufEnter *.py,*.cpp,*.cxx,*.rst,*.tex
             \ if exists("&colorcolumn") |
                 \ set colorcolumn=80 |
             \ endif
-augroup END
+"augroup END
 
-if version >= 703
+"if version >= 703
     "set colorcolumn=80
     "highlight ColorColumn ctermbg=233
-endif
+"endif
 
 function! s:Underline(chars)
     let chars = empty(a:chars) ? '-' : a:chars
