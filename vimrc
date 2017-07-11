@@ -56,14 +56,13 @@ set ruler		" Show the cursor position all the time
 set showcmd		" Display incomplete commands
 set incsearch	" Do incremental searching
 
-" Real programmers don't use tabs
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set shiftround
 set expandtab
 set smarttab
-set autoindent	" Always set autoindentation on
+set autoindent
 set smartindent
 
 " except in Makefiles...
@@ -81,7 +80,7 @@ function! Determine_Indentation()
     let n_tabs = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^\\t"'))
     let n_spaces = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^ "'))
     if n_tabs > n_spaces
-        set tabstop=8 shiftwidth=8 noexpandtab
+        set tabstop=4 shiftwidth=4 noexpandtab
     else
         let n_2_spaces = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^  \\S"'))
         let n_4_spaces = len(filter(getbufline(winbufnr(0), 1, "$"), 'v:val =~ "^    \\S"'))
@@ -96,7 +95,7 @@ autocmd BufReadPost * call Determine_Indentation()
 autocmd FileType text setlocal textwidth=78
 
 " Delete trailing whitespace
-autocmd BufWritePre *.sh,*.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.pyx,*.tex,*.rst,*.md,*.bib,Makefile,Dockerfile :%s/\s\+$//e
+autocmd BufWritePre *.sh,*.cxx,*.cpp,*.icc,*.cc,*.h,*.py,*.pyx,*.rst,*.md,*.bib,Makefile,Dockerfile :%s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
